@@ -1,6 +1,4 @@
-import json
 import tempfile
-
 import ee
 import geemap.foliumap as geemap
 import pandas as pd
@@ -106,8 +104,7 @@ def add_park_polygons(m, csv_file):
         geojson_data,
         name="Urban Parks",
         style_function=style_function,
-        tooltip=folium.features.GeoJsonTooltip(fields=['name'], aliases=["Park: "]),
-        popup=folium.features.GeoJsonPopup(fields=['name'], aliases=["Park: "])
+        tooltip=folium.features.GeoJsonTooltip(fields=['name'], aliases=["Park: "])
     )
     geojson_layer.add_to(m)
 
@@ -123,7 +120,7 @@ def create_map(aoi_center, ndvi_masked):
     folium.TileLayer(
         tiles='https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
         attr='Google Satellite',
-        max_zoom=20,
+        max_zoom=25,
         name='Google Satellite'
     ).add_to(m)
 
@@ -177,7 +174,6 @@ def main():
         },
         "NDVI (Inside Parks)"
     )
-
     m.addLayerControl()
     m.to_streamlit(height=1000)
 
